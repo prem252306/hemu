@@ -599,10 +599,24 @@
             nextBtn.textContent = n === totalSlides ? 'Finish' : 'Next';
         }
 
+        function nextSlide() {
+            currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+            showSlide(currentSlide);
+        }
+
+        // Auto-play slides every 5 seconds
+        let autoPlayInterval = setInterval(nextSlide, 5000);
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+
         prevBtn.addEventListener('click', () => {
             if (currentSlide > 1) {
                 currentSlide--;
                 showSlide(currentSlide);
+                resetAutoPlay();
             }
         });
 
@@ -610,11 +624,21 @@
             if (currentSlide < totalSlides) {
                 currentSlide++;
                 showSlide(currentSlide);
+                resetAutoPlay();
             } else {
-                // Optional: Loop back or do something on finish
                 currentSlide = 1;
                 showSlide(currentSlide);
+                resetAutoPlay();
             }
+        });
+
+        // Pause auto-play on hover
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        slideshowContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoPlayInterval);
+        });
+        slideshowContainer.addEventListener('mouseleave', () => {
+            autoPlayInterval = setInterval(nextSlide, 5000);
         });
 
         // Initialize
