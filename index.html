@@ -25,8 +25,10 @@
 
         .slideshow-container {
             position: relative;
-            width: 1280px;
-            height: 720px;
+            width: 100%;
+            max-width: 1280px;
+            min-height: 100vh;
+            height: 100%;
             overflow: hidden;
             background: linear-gradient(135deg, #0f0505 0%, #1a0a0a 100%);
         }
@@ -36,9 +38,12 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            min-height: 100%;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .slide.active {
@@ -409,6 +414,14 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                height: auto;
+                overflow-x: hidden;
+            }
+            .slideshow-container {
+                width: 100%;
+                min-height: 100vh;
+            }
             .bls-title {
                 font-size: 40px;
             }
@@ -420,7 +433,12 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            .main-content,
             .product-main-content {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
                 flex-direction: column;
                 width: 95%;
                 height: auto;
@@ -428,11 +446,11 @@
                 padding: 20px 0;
             }
             .product-image-container {
-                width: 250px;
+                width: 240px;
                 height: 300px;
             }
             .product-image {
-                width: 230px;
+                width: 220px;
                 height: 280px;
             }
             .spec-container {
@@ -441,6 +459,7 @@
             .title {
                 font-size: 28px;
                 text-align: center;
+                white-space: normal;
             }
             .spec-row {
                 flex-direction: column;
@@ -476,15 +495,24 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                overflow-x: hidden;
+            }
+            .slideshow-container {
+                width: 100%;
+                min-height: 100vh;
+            }
             .bls-title {
-                font-size: 30px;
+                font-size: 28px;
             }
             .subtitle {
                 font-size: 12px;
             }
+            .main-content,
             .product-main-content {
-                width: 98%;
+                width: 100%;
                 padding: 10px 0;
+                gap: 15px;
             }
             .product-image-container {
                 width: 200px;
@@ -495,7 +523,11 @@
                 height: 230px;
             }
             .title {
-                font-size: 24px;
+                font-size: 22px;
+            }
+            .spec-row {
+                flex-direction: column;
+                gap: 12px;
             }
             .spec-card {
                 padding: 10px 12px;
