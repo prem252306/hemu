@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+
+* {
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+}
+
+body {
+
+font-family: 'Montserrat', sans-serif;
+
+background: linear-gradient(135deg, #1a0a0a 0%, #2d1a1a 50%, #1a0a0a 100%);
+
+overflow: hidden;
+
+}
+
+.slide-container {
+
+position: relative;
+
+width: 1280px;
+
+height: 720px;
+
+overflow: hidden;
+
+background: linear-gradient(135deg, #0f0505 0%, #1a0a0a 100%);
+
+}
+
+/* Animated Background Particles */
+
+.particle {
+
+position: absolute;
+
+width: 4px;
+
+height: 4px;
+
+background: #D4AF37;
+
+border-radius: 50%;
+
+opacity: 0;
+
+animation: floatUp 3s ease-in-out infinite;
+
+}
+
+@keyframes floatUp {
+
+0% { transform: translateY(0) scale(0); opacity: 0; }
+
+50% { opacity: 0.8; }
+
+100% { transform: translateY(-100px) scale(1); opacity: 0; }
+
+}
+
+/* Main Content */
+
+.main-content {
+
+position: absolute;
+
+top: 50%;
+
+left: 50%;
+
+transform: translate(-50%, -50%);
+
+text-align: center;
+
+width: 800px;
+
+}
+
+/* BLS Title */
+
+.bls-title {
+
+font-family: 'Playfair Display', serif;
+
+font-size: 120px;
+
+font-weight: 700;
+
+color: #D4AF37;
+
+text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+
+animation: glowPulse 2s ease-in-out infinite;
+
+margin-bottom: 10px;
+
+}
+
+@keyframes glowPulse {
+
+0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
+
+50% { text-shadow: 0 0 40px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4); }
+
+}
+
+/* Subtitle */
+
+.subtitle {
+
+font-size: 18px;
+
+color: #D4AF37;
+
+letter-spacing: 8px;
+
+text-transform: uppercase;
+
+margin-bottom: 20px;
+
+animation: fadeInUp 1s ease-out 0.5s both;
+
+}
+
+/* Product Categories */
+
+.categories {
+
+display: flex;
+
+justify-content: center;
+
+gap: 30px;
+
+margin: 20px 0;
+
+animation: fadeInUp 1s ease-out 1s both;
+
+}
+
+.category {
+
+color: #fff;
+
+font-size: 14px;
+
+}
+
+.category span {
+
+color: #D4AF37;
+
+margin: 0 5px;
+
+}
+
+/* Tagline */
+
+.tagline {
+
+font-size: 16px;
+
+color: rgba(255,255,255,0.8);
+
+margin: 20px 0;
+
+animation: fadeInUp 1s ease-out 1.5s both;
+
+}
+
+/* Contact Info */
+
+.contact-info {
+
+position: absolute;
+
+bottom: 40px;
+
+left: 50%;
+
+transform: translateX(-50%);
+
+text-align: center;
+
+color: rgba(255,255,255,0.7);
+
+font-size: 14px;
+
+animation: fadeInUp 1s ease-out 2s both;
+
+}
+
+@keyframes fadeInUp {
+
+from {
+
+opacity: 0;
+
+transform: translateY(20px);
+
+}
+
+to {
+
+opacity: 1;
+
+transform: translateY(0);
+
+}
+
+}
+
+/* Decorative Elements */
+
+.decor-line {
+
+position: absolute;
+
+width: 200px;
+
+height: 2px;
+
+background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+
+top: 50%;
+
+left: 50%;
+
+transform: translateX(-50%);
+
+}
+
+.decor-line.left {
+
+left: 20%;
+
+}
+
+.decor-line.right {
+
+left: 80%;
+
+}
+
+/* Smoke Effect */
+
+.smoke {
+
+position: absolute;
+
+bottom: 0;
+
+left: 0;
+
+right: 0;
+
+height: 200px;
+
+background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+
+pointer-events: none;
+
+}
+
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Particles -->
+<div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+<div class="particle" style="left: 20%; animation-delay: 0.5s;"></div>
+<div class="particle" style="left: 30%; animation-delay: 1s;"></div>
+<div class="particle" style="left: 40%; animation-delay: 1.5s;"></div>
+<div class="particle" style="left: 50%; animation-delay: 2s;"></div>
+<div class="particle" style="left: 60%; animation-delay: 2.5s;"></div>
+<div class="particle" style="left: 70%; animation-delay: 3s;"></div>
+<div class="particle" style="left: 80%; animation-delay: 3.5s;"></div>
+<!-- Main Content -->
+<div class="main-content">
+<div class="bls-title">BLS</div>
+<div class="subtitle">GLOBAL ENTERPRISE</div>
+<div style="font-size: 48px; color: #fff; margin: 20px 0; font-family: 'Playfair Display', serif;">
+
+PRODUCT CATALOGUE
+
+</div>
+<div class="categories">
+<div class="category">Agarbatti <span>•</span></div>
+<div class="category">Dhoop <span>•</span></div>
+<div class="category">Sambharani</div>
+</div>
+<div class="tagline">Committed to Quality and Growth.</div>
+</div>
+<!-- Contact Info -->
+<div class="contact-info">
+<p>Manufacturer • Trader • Exporter | www.blsglobalenterprise.com | +91 9413647695</p>
+</div>
+<!-- Decorative Lines -->
+<div class="decor-line left"></div>
+<div class="decor-line right"></div>
+<!-- Smoke Effect -->
+<div class="smoke"></div>
+</div>
+</body>
+</html>
