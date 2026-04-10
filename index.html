@@ -1,824 +1,823 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet"/>
-    <title>BLS Global Enterprise - Product Catalogue</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SBPRODUCTS - Complete Product Catalogue</title>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        body {
+        html, body {
+            min-height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #1a0a0a 0%, #2d1a1a 50%, #1a0a0a 100%);
-            overflow: hidden;
+            background: linear-gradient(135deg, #0f0505 0%, #1a0a0a 100%);
+            color: #fff;
+        }
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            overflow-x: hidden;
         }
-
         .slideshow-container {
             position: relative;
             width: 100%;
             max-width: 1280px;
             min-height: 100vh;
-            height: 100%;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0f0505 0%, #1a0a0a 100%);
+            padding: 20px;
         }
-
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: 100%;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            visibility: hidden;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, visibility 0.6s ease, transform 0.6s ease;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .card {
+            width: 100%;
+            max-width: 1180px;
+            min-height: 620px;
+            background: rgba(10, 6, 6, 0.94);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideInUp 0.8s ease;
+        }
+        .card-inner {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+            padding: 30px;
+        }
+        .card-image {
+            flex: 0 0 420px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        .slide.active {
-            opacity: 1;
+        .card-image img {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: fadeInScale 1s ease both;
         }
-
-        /* Animated Background Particles */
-        .particle {
+        .hero-card {
+            background: linear-gradient(135deg, rgba(15, 5, 5, 0.98) 0%, rgba(35, 16, 16, 0.96) 100%);
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+        }
+        .hero-card::before {
+            content: '';
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #D4AF37;
-            border-radius: 50%;
-            opacity: 0;
-            animation: floatUp 3s ease-in-out infinite;
+            top: -40%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+            animation: floatGlow 16s ease-in-out infinite;
         }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-100px) scale(1); opacity: 0; }
-        }
-
-        /* Main Content for Title Slide */
-        .main-content {
+        .hero-card::after {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 800px;
+            bottom: -30%;
+            left: -30%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 75%);
+            filter: blur(60px);
+            pointer-events: none;
         }
-
-        /* BLS Title */
-        .bls-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 120px;
-            font-weight: 700;
-            color: #D4AF37;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            animation: glowPulse 2s ease-in-out infinite;
-            margin-bottom: 10px;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
-            50% { text-shadow: 0 0 40px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.4); }
-        }
-
-        /* Subtitle */
-        .subtitle {
-            font-size: 18px;
-            color: #D4AF37;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            animation: fadeInUp 1s ease-out 0.5s both;
-        }
-
-        /* Product Categories */
-        .categories {
+        .intro-content {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            animation: fadeInUp 1s ease-out 1s both;
+            gap: 40px;
+            text-align: center;
+            padding: 100px 40px;
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            min-height: 620px;
         }
-
-        .category {
+        .intro-logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            animation: slideInUp 1s ease both;
+        }
+        .intro-logo {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #D4AF37, #f8e39b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            font-weight: 700;
+            color: #301b00;
+            box-shadow: 0 30px 80px rgba(212,175,55,0.4), inset 0 -4px 12px rgba(0,0,0,0.2);
+            animation: bounce 2.5s ease-in-out infinite;
+        }
+        .intro-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 80px;
+            font-weight: 700;
             color: #fff;
-            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1;
+            animation: fadeInUp 1.3s ease both 0.2s;
         }
-
-        .category span {
+        .intro-brand-name span {
+            background: linear-gradient(135deg, #D4AF37, #f8e39b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .intro-contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            animation: fadeInUp 1.3s ease both 0.4s;
+        }
+        .contact-phones {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .contact-phones a {
             color: #D4AF37;
-            margin: 0 5px;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
-
-        /* Tagline */
-        .tagline {
+        .contact-phones a:hover {
+            color: #f8e39b;
+        }
+        .contact-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+        .contact-email {
+            font-size: 16px;
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
+        }
+        .contact-email a {
+            color: #D4AF37;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-email a:hover {
+            color: #f8e39b;
+        }
+        .card-copy {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 18px;
+        }
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            color: #D4AF37;
+            font-size: 44px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: textPop 0.9s ease both;
+        }
+        .slide-subtitle {
             font-size: 16px;
             color: rgba(255,255,255,0.8);
-            margin: 20px 0;
-            animation: fadeInUp 1s ease-out 1.5s both;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
-
-        /* Contact Info */
-        .contact-info {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .feature-item {
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.18);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            opacity: 0;
+        }
+        .slide.active .feature-item {
+            animation: fadeInUp 0.85s ease both;
+        }
+        .slide.active .feature-item:nth-child(1) { animation-delay: 0.12s; }
+        .slide.active .feature-item:nth-child(2) { animation-delay: 0.18s; }
+        .slide.active .feature-item:nth-child(3) { animation-delay: 0.24s; }
+        .slide.active .feature-item:nth-child(4) { animation-delay: 0.30s; }
+        .slide.active .feature-item:nth-child(5) { animation-delay: 0.36s; }
+        .slide.active .feature-item:nth-child(6) { animation-delay: 0.42s; }
+        .feature-item i {
+            color: #D4AF37;
+            min-width: 24px;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+        .feature-label {
+            font-size: 12px;
             color: rgba(255,255,255,0.7);
-            font-size: 14px;
-            animation: fadeInUp 1s ease-out 2s both;
         }
-
-        @keyframes fadeInUp {
+        .feature-value {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        .card-note {
+            background: rgba(212,175,55,0.1);
+            border-left: 4px solid #D4AF37;
+            border-radius: 0 0 0 16px;
+            padding: 16px 20px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.88);
+            animation: fadeInUp 0.8s ease both;
+            animation-delay: 0.4s;
+        }
+        .slide.active .contact-bar {
+            animation: fadeInUp 0.7s ease both;
+            animation-delay: 0.5s;
+        }
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: rgba(255,255,255,0.03);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .contact-bar span {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+        }
+        .contact-bar a {
+            color: #D4AF37;
+            text-decoration: none;
+        }
+        .nav-buttons {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        .nav-btn {
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: #D4AF37;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            font-size: 14px;
+        }
+        .nav-btn:hover {
+            background: rgba(212,175,55,0.18);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.2);
+        }
+        .slide-indicator {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            color: rgba(255,255,255,0.65);
+            font-size: 13px;
+        }
+        @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(28px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        /* Decorative Elements */
-        .decor-line {
-            position: absolute;
-            width: 200px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-            top: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .decor-line.left {
-            left: 20%;
-        }
-
-        .decor-line.right {
-            left: 80%;
-        }
-
-        /* Smoke Effect */
-        .smoke {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            pointer-events: none;
-        }
-
-        /* Main Layout for Product Slides */
-        .product-main-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1100px;
-            height: 600px;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        /* Left Side - Product Image */
-        .product-image-container {
-            position: relative;
-            width: 400px;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-image {
-            width: 350px;
-            height: 450px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: floatImage 3s ease-in-out infinite;
-        }
-
-        @keyframes floatImage {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Right Side - Spec Cards */
-        .spec-container {
-            width: 600px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Title */
-        .title {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
-            font-weight: 700;
-            color: #D4AF37;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease-out 0.5s both;
-            white-space: nowrap;
-        }
-
-        /* Spec Cards */
-        .spec-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .spec-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 10px;
-            padding: 15px 20px;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            animation: slideInRight 0.8s ease-out both;
-            min-width: 0;
-        }
-
-        .spec-card:nth-child(1) { animation-delay: 0.8s; }
-        .spec-card:nth-child(2) { animation-delay: 1s; }
-        .spec-card:nth-child(3) { animation-delay: 1.2s; }
-        .spec-card:nth-child(4) { animation-delay: 1.4s; }
-        .spec-card:nth-child(5) { animation-delay: 1.6s; }
-        .spec-card:nth-child(6) { animation-delay: 1.8s; }
-
-        @keyframes slideInRight {
+        @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: translateX(50px);
+                transform: scale(0.96);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: scale(1);
             }
         }
-
-        .spec-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(212,175,55,0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #D4AF37;
-            font-size: 18px;
-            flex: 0 0 40px;
-        }
-
-        .spec-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .spec-label {
-            font-size: 12px;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 5px;
-        }
-
-        .spec-value {
-            font-size: 14px;
-            color: #fff;
-            font-weight: 600;
-            line-height: 1.25;
-            word-break: break-word;
-        }
-
-        /* Bottom Note */
-        .bottom-note {
-            margin-top: 20px;
-            padding: 15px 20px;
-            background: rgba(212,175,55,0.1);
-            border-left: 3px solid #D4AF37;
-            border-radius: 0 10px 10px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: fadeInUp 1s ease-out 2s both;
-            min-height: 54px;
-        }
-
-        .bottom-note i {
-            color: #D4AF37;
-        }
-
-        .bottom-note span {
-            color: rgba(255,255,255,0.8);
-            font-size: 14px;
-            line-height: 1.3;
-        }
-
-        /* Glow Effect */
-        .glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Navigation */
-        .nav-buttons {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            background: rgba(212,175,55,0.2);
-            border: 1px solid #D4AF37;
-            color: #D4AF37;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .nav-btn:hover {
-            background: rgba(212,175,55,0.4);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Responsive */
-        @media (max-width: 1280px) {
-            .slideshow-container {
-                width: 100vw;
-                height: 100vh;
+        @keyframes textPop {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
             }
-            .main-content, .product-main-content {
-                width: 90%;
-            }
-            .bls-title {
-                font-size: 80px;
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
         }
-
-        @media (max-width: 1024px) {
-            .bls-title {
-                font-size: 60px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
             }
-            .product-main-content {
-                width: 95%;
-                gap: 30px;
-            }
-            .product-image-container {
-                width: 300px;
-                height: 400px;
-            }
-            .product-image {
-                width: 280px;
-                height: 380px;
-            }
-            .spec-container {
-                width: 500px;
-            }
-            .title {
-                font-size: 36px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-
-        @media (max-width: 768px) {
-            body {
-                height: auto;
-                overflow-x: hidden;
+        @keyframes floatGlow {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0.9;
             }
-            .slideshow-container {
-                width: 100%;
-                min-height: 100vh;
-            }
-            .bls-title {
-                font-size: 40px;
-            }
-            .subtitle {
-                font-size: 14px;
-                letter-spacing: 4px;
-            }
-            .categories {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .main-content,
-            .product-main-content {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                flex-direction: column;
-                width: 95%;
-                height: auto;
-                gap: 20px;
-                padding: 20px 0;
-            }
-            .product-image-container {
-                width: 240px;
-                height: 300px;
-            }
-            .product-image {
-                width: 220px;
-                height: 280px;
-            }
-            .spec-container {
-                width: 100%;
-            }
-            .title {
-                font-size: 28px;
-                text-align: center;
-                white-space: normal;
-            }
-            .spec-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .spec-card {
-                padding: 12px 15px;
-            }
-            .spec-icon {
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
-            }
-            .spec-label {
-                font-size: 11px;
-            }
-            .spec-value {
-                font-size: 13px;
-            }
-            .bottom-note {
-                padding: 12px 15px;
-                font-size: 13px;
-            }
-            .nav-buttons {
-                bottom: 10px;
-                right: 10px;
-                gap: 5px;
-            }
-            .nav-btn {
-                padding: 8px 12px;
-                font-size: 12px;
+            50% {
+                transform: translate(-12px, 10px);
+                opacity: 0.7;
             }
         }
-
-        @media (max-width: 480px) {
-            body {
-                overflow-x: hidden;
+        @keyframes floatImage {
+            from {
+                opacity: 0;
+                transform: translateY(24px) scale(0.98);
             }
-            .slideshow-container {
-                width: 100%;
-                min-height: 100vh;
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
-            .bls-title {
-                font-size: 28px;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
             }
-            .subtitle {
-                font-size: 12px;
+            50% {
+                transform: translateY(-12px);
             }
-            .main-content,
-            .product-main-content {
-                width: 100%;
-                padding: 10px 0;
-                gap: 15px;
-            }
-            .product-image-container {
-                width: 200px;
-                height: 250px;
-            }
-            .product-image {
-                width: 180px;
-                height: 230px;
-            }
-            .title {
-                font-size: 22px;
-            }
-            .spec-row {
-                flex-direction: column;
-                gap: 12px;
-            }
-            .spec-card {
-                padding: 10px 12px;
-            }
-            .spec-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 14px;
-            }
-            .spec-label {
-                font-size: 10px;
-            }
-            .spec-value {
-                font-size: 12px;
-            }
-            .bottom-note {
-                padding: 10px 12px;
-                font-size: 12px;
-            }
-            .contact-info {
-                font-size: 12px;
-                bottom: 20px;
-            }
-            .nav-buttons {
-                bottom: 5px;
-                right: 5px;
-            }
-            .nav-btn {
-                padding: 6px 10px;
-                font-size: 11px;
-            }
+        }
+        @media (max-width: 980px) {
+            .card-inner { flex-direction: column; align-items: center; }
+            .hero-inner { padding: 30px; flex-direction: column; }
+            .hero-copy { max-width: 100%; }
+            .hero-badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hero-image { margin-top: 20px; }
+            .intro-values { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .intro-content { padding: 50px 30px; }
+            .intro-main-title { font-size: 56px; }
+            .card-image, .card-copy { width: 100%; }
+            .card { min-height: auto; }
+            .feature-list { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 680px) {
+            .slideshow-container { padding: 10px; }
+            .slide { top: 10px; left: 10px; right: 10px; bottom: 10px; }
+            .slide-title { font-size: 32px; }
+            .intro-main-title { font-size: 40px; letter-spacing: 1px; }
+            .intro-tagline { font-size: 16px; }
+            .intro-logo { width: 100px; font-size: 48px; }
+            .intro-values { grid-template-columns: 1fr; gap: 12px; }
+            .intro-content { padding: 40px 20px; gap: 20px; }
+            .slide-subtitle { font-size: 13px; letter-spacing: 0.25em; }
+            .nav-btn { padding: 10px 14px; font-size: 12px; }
+            .contact-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
         }
     </style>
 </head>
 <body>
     <div class="slideshow-container">
-        <!-- Slide 1: Title -->
-        <div class="slide active" id="slide1">
-            <!-- Background Particles -->
-            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; animation-delay: 0.5s;"></div>
-            <div class="particle" style="left: 30%; animation-delay: 1s;"></div>
-            <div class="particle" style="left: 40%; animation-delay: 1.5s;"></div>
-            <div class="particle" style="left: 50%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 60%; animation-delay: 2.5s;"></div>
-            <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
-            <div class="particle" style="left: 80%; animation-delay: 3.5s;"></div>
-            <!-- Main Content -->
-            <div class="main-content">
-                <div class="bls-title">BLS</div>
-                <div class="subtitle">GLOBAL ENTERPRISE</div>
-                <div style="font-size: 48px; color: #fff; margin: 20px 0; font-family: 'Playfair Display', serif;">
-                    PRODUCT CATALOGUE
+        <div class="slide active hero-slide">
+            <div class="card hero-card">
+                <div class="intro-content">
+                    <div class="intro-logo-section">
+                        <div class="intro-logo">SB</div>
+                        <div class="intro-brand-name"><span>SBPRODUCTS</span></div>
+                    </div>
+                    <div class="intro-contact-info">
+                        <div class="contact-phones">
+                            <a href="tel:+919413647695">+91 9824002352</a> | 
+                            <a href="tel:+919549999779">+91 9549999779</a> | 
+                            <a href="tel:+919983574341">+91 9983574341</a>
+                        </div>
+                        <div class="contact-divider"></div>
+                        <div class="contact-email">
+                            <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="categories">
-                    <div class="category">Agarbatti <span>•</span></div>
-                    <div class="category">Dhoop <span>•</span></div>
-                    <div class="category">Sambharani</div>
-                </div>
-                <div class="tagline">Committed to Quality and Growth.</div>
-            </div>
-            <!-- Contact Info -->
-            <div class="contact-info">
-                <p>Manufacturer • Trader • Exporter | www.blsglobalenterprise.com | +91 9413647695</p>
-            </div>
-            <!-- Decorative Lines -->
-            <div class="decor-line left"></div>
-            <div class="decor-line right"></div>
-            <!-- Smoke Effect -->
-            <div class="smoke"></div>
-        </div>
-
-        <!-- Slide 2: Raw Black Agarbatti -->
-        <div class="slide" id="slide2">
-            <!-- Background Particles -->
-            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; animation-delay: 0.5s;"></div>
-            <div class="particle" style="left: 30%; animation-delay: 1s;"></div>
-            <div class="particle" style="left: 40%; animation-delay: 1.5s;"></div>
-            <div class="particle" style="left: 50%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 60%; animation-delay: 2.5s;"></div>
-            <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
-            <div class="particle" style="left: 80%; animation-delay: 3.5s;"></div>
-            <!-- Main Content -->
-            <div class="product-main-content">
-                <!-- Left Side - Product Image -->
-                <div class="product-image-container">
-                    <div class="glow"></div>
-                    <img alt="Raw Black Agarbatti" class="product-image" src="https://page.gensparksite.com/slides_images/910d428d2ff125ebbf73922d103e2022.webp"/>
-                </div>
-                <!-- Right Side - Spec Cards -->
-                <div class="spec-container">
-                    <div class="title">RAW BLACK AGARBATTI</div>
-                    <div class="spec-row">
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-ruler"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Length</div>
-                                <div class="spec-value">8 / 9 Inches</div>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-circle"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Color</div>
-                                <div class="spec-value">Black</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="spec-row">
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-leaf"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Made With</div>
-                                <div class="spec-value">Bamboo stick (splinter-free)</div>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-flask"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Material</div>
-                                <div class="spec-value">Charcoal + Wood + Jigat/Joss</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="spec-row">
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-box"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Count</div>
-                                <div class="spec-value">700/800/900/1000 pcs/kg</div>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-fire"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Burn Time</div>
-                                <div class="spec-value">~45 Minutes</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottom-note">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Holds fragrance well after dipping</span>
-                    </div>
+                <div class="contact-bar hero-contact">
+                    <span>www.blsglobalenterprise.com</span>
+                    <span>Premium Incense Products</span>
                 </div>
             </div>
         </div>
-
-        <!-- Slide 3: T1 Color Raw Agarbatti -->
-        <div class="slide" id="slide3">
-            <!-- Background Particles -->
-            <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-            <div class="particle" style="left: 20%; animation-delay: 0.5s;"></div>
-            <div class="particle" style="left: 30%; animation-delay: 1s;"></div>
-            <div class="particle" style="left: 40%; animation-delay: 1.5s;"></div>
-            <div class="particle" style="left: 50%; animation-delay: 2s;"></div>
-            <div class="particle" style="left: 60%; animation-delay: 2.5s;"></div>
-            <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
-            <div class="particle" style="left: 80%; animation-delay: 3.5s;"></div>
-            <!-- Main Content -->
-            <div class="product-main-content">
-                <!-- Left Side - Product Image -->
-                <div class="product-image-container">
-                    <div class="glow"></div>
-                    <img alt="T1 Color Raw Agarbatti" class="product-image" src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp"/>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/910d428d2ff125ebbf73922d103e2022.webp" alt="Raw Black Agarbatti" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Raw Agarbatti</div>
+                            <div class="slide-title">Raw Black Agarbatti</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">8 Inches / 9 Inches</div></div></div>
+                                <div class="feature-item"><i class="fas fa-palette"></i><div><div class="feature-label">Color</div><div class="feature-value">Black</div></div></div>
+                                <div class="feature-item"><i class="fas fa-leaf"></i><div><div class="feature-label">Type</div><div class="feature-value">Raw (Unscented)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-box"></i><div><div class="feature-label">Count</div><div class="feature-value">1000 / 900 / 800 / 700 pcs per kg</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Material</div><div class="feature-value">Charcoal + Wood + Jigat/Joss blend</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Made with splinter-free bamboo stick and eco-friendly base materials. Holds fragrance well after dipping for deep perfume retention.</div>
+                    </div>
                 </div>
-                <!-- Right Side - Spec Cards -->
-                <div class="spec-container">
-                    <div class="title">T1 COLOR RAW AGARBATTI</div>
-                    <div class="spec-row">
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-ruler"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Length</div>
-                                <div class="spec-value">8 / 9 Inches (Custom available)</div>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-palette"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Colors</div>
-                                <div class="spec-value">Pink, Yellow, Green, Blue & more</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="spec-row">
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-leaf"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Base</div>
-                                <div class="spec-value">T1 Wood Powder + Joss + Bamboo</div>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-magic"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Finish</div>
-                                <div class="spec-value">Smooth, vibrant colored coating</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="spec-row">
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-box"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Count</div>
-                                <div class="spec-value">900 / 1000 pcs per kg</div>
-                            </div>
-                        </div>
-                        <div class="spec-card">
-                            <div class="spec-icon"><i class="fas fa-fire"></i></div>
-                            <div class="spec-content">
-                                <div class="spec-label">Burn Time</div>
-                                <div class="spec-value">~45 Minutes</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottom-note">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Holds fragrance well after dipping</span>
-                    </div>
+                <div class="contact-bar">
+                    <span>Contact us for bulk orders and custom lengths</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
                 </div>
             </div>
         </div>
-
-        <!-- Navigation Buttons -->
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp" alt="Masala Agarbatti" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Masala Agarbatti</div>
+                            <div class="slide-title">Masala Agarbatti</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">8 Inches</div></div></div>
+                                <div class="feature-item"><i class="fas fa-smile"></i><div><div class="feature-label">Fragrance</div><div class="feature-value">Chandan, Loban, Rose, Mogra, etc.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-flask"></i><div><div class="feature-label">Finish</div><div class="feature-value">Thick, rich natural masala coating</div></div></div>
+                                <div class="feature-item"><i class="fas fa-seedling"></i><div><div class="feature-label">Base Materials</div><div class="feature-value">Wood powder, charcoal powder, herbal powders, resins, natural oils, guggal, halmaddi</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Stick Type</div><div class="feature-value">Bamboo-based, eco-friendly</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45 minutes</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Premium masala agarbatti for rich aromatic experiences. Ideal for devotional rituals, meditation, and home fragrance.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Pure traditional masala formula</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp" alt="T1 Color Raw Agarbatti" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Color Raw Agarbatti</div>
+                            <div class="slide-title">T1 Color Raw Agarbatti</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">8 / 9 Inches (custom lengths available)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-palette"></i><div><div class="feature-label">Colors</div><div class="feature-value">Pink, Yellow, Green, Blue, and more</div></div></div>
+                                <div class="feature-item"><i class="fas fa-seedling"></i><div><div class="feature-label">Finish</div><div class="feature-value">Smooth vibrant colored coating</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Base Materials</div><div class="feature-value">T1 wood powder, joss, bamboo stick</div></div></div>
+                                <div class="feature-item"><i class="fas fa-box"></i><div><div class="feature-label">Count</div><div class="feature-value">1000 / 900 pcs per kg</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45 minutes approx.</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Ideal for decorative fragrance and premium gift packs. Strong oil absorption for excellent dipping performance.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Custom color raw agarbatti</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp" alt="Floral Masala Agarbatti" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Floral Masala Agarbatti</div>
+                            <div class="slide-title">Floral Masala Agarbatti</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-flower"></i><div><div class="feature-label">Fragrance</div><div class="feature-value">Rose, Jasmine, Lavender, Mogra, Marigold & more</div></div></div>
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">8 Inches</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">40�50 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Stick Base</div><div class="feature-value">Natural bamboo</div></div></div>
+                                <div class="feature-item"><i class="fas fa-seedling"></i><div><div class="feature-label">Coating</div><div class="feature-value">Thick herbal masala paste with flower oils and powders</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fill-drip"></i><div><div class="feature-label">Color</div><div class="feature-value">Natural brown or fragrance-based colored coating</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Rich floral aromas crafted for an elegant sensory experience. Machine-made with premium texture and fragrance hold.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Floral and herbal fragrant sticks</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/910d428d2ff125ebbf73922d103e2022.webp" alt="Cow Dung Raw Agarbatti" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Cow Dung Raw Agarbatti</div>
+                            <div class="slide-title">Cow Dung Raw Agarbatti</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-hand-holding-seedling"></i><div><div class="feature-label">Material</div><div class="feature-value">Pure indigenous cow dung, joss powder, wood dust, natural binder</div></div></div>
+                                <div class="feature-item"><i class="fas fa-palette"></i><div><div class="feature-label">Color</div><div class="feature-value">Natural brown / earthy tone</div></div></div>
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">8 Inches (custom lengths available)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Stick Base</div><div class="feature-value">Eco-friendly bamboo stick</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fill-drip"></i><div><div class="feature-label">Usage</div><div class="feature-value">For dipping in herbal, ayurvedic, or devotional fragrances</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Type</div><div class="feature-value">Raw (unscented)</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Traditional cow dung based agarbatti for ritual and devotional use. Strong oil absorption and pure natural composition.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Natural ash stick base for fragrance dipping</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/910d428d2ff125ebbf73922d103e2022.webp" alt="Mosquito Raw Agarbatti" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Mosquito Raw Agarbatti</div>
+                            <div class="slide-title">Mosquito Raw Agarbatti</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">12 Inches</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fill-drip"></i><div><div class="feature-label">Material Composition</div><div class="feature-value">Jigat powder, wood dust, natural binder</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Stick Type</div><div class="feature-value">High-quality bamboo stick</div></div></div>
+                                <div class="feature-item"><i class="fas fa-shield-alt"></i><div><div class="feature-label">Purpose</div><div class="feature-value">Base stick for mosquito repellent oils</div></div></div>
+                                <div class="feature-item"><i class="fas fa-water"></i><div><div class="feature-label">Absorption</div><div class="feature-value">Excellent oil-holding capacity</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Type</div><div class="feature-value">Raw (unscented)</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Designed for effective mosquito repellent oil use. Excellent oil-holding capacity ensures long-lasting protection.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Natural mosquito control stick</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/910d428d2ff125ebbf73922d103e2022.webp" alt="Dhoop Stick Indian Wood" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Dhoop Stick</div>
+                            <div class="slide-title">Dhoop Stick (Indian Wood)</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">3", 4", 6", 8" (custom sizes available)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-box"></i><div><div class="feature-label">Type</div><div class="feature-value">Solid dhoop (no bamboo stick)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Ingredients</div><div class="feature-value">Indian wood powders, guggal, herbs, resins, natural binders</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45�60 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-smell"></i><div><div class="feature-label">Fragrance</div><div class="feature-value">Deep earthy woody aroma, customizable</div></div></div>
+                                <div class="feature-item"><i class="fas fa-leaf"></i><div><div class="feature-label">Color</div><div class="feature-value">Natural brown / dark wood shade</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Handcrafted solid dhoop sticks for devotional spaces and aromatic prana. Chemical-free and eco-conscious formulation.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Indian wood dhoop for temples and meditation</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp" alt="Masala Dhoop Sticks" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Dhoop Stick</div>
+                            <div class="slide-title">Masala Dhoop Sticks</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">3", 4", 6", 8" (custom sizes available)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-box"></i><div><div class="feature-label">Type</div><div class="feature-value">Solid dhoop stick without bamboo</div></div></div>
+                                <div class="feature-item"><i class="fas fa-seedling"></i><div><div class="feature-label">Ingredients</div><div class="feature-value">Herbal powders, gums, resins, wood powders, oils, camphor</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45�60 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-smell"></i><div><div class="feature-label">Fragrance</div><div class="feature-value">Chandan, Loban, Guggal, Rose, Jasmine, Herbal etc.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-handshake"></i><div><div class="feature-label">Finish</div><div class="feature-value">Smooth hand-rolled thick masala coating</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Traditional masala dhoop sticks crafted for pure sacred fragrance and daily prayer use.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Herbal dhoop stick range for cosy worship spaces</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp" alt="Dhoop Sticks T1" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Dhoop Sticks</div>
+                            <div class="slide-title">Dhoop Sticks (T1)</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">3", 4", 6", 8" (custom sizes available)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-certificate"></i><div><div class="feature-label">Grade</div><div class="feature-value">Premium T1 grade</div></div></div>
+                                <div class="feature-item"><i class="fas fa-seedling"></i><div><div class="feature-label">Ingredients</div><div class="feature-value">Herbal powders, resins, wood powders, binders, essential oils</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45�60 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-palette"></i><div><div class="feature-label">Color</div><div class="feature-value">Dark brown or customized shades</div></div></div>
+                                <div class="feature-item"><i class="fas fa-handshake"></i><div><div class="feature-label">Finish</div><div class="feature-value">Uniform smooth shape with premium texture</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Premium dhoop with long-lasting aroma and a consistent shape for superior burning.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Premium T1 dhoop for premium puja experiences</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/4fb9b3170162981af3b9d7ab78b8d4bb.webp" alt="Floral Herbal Dhoop Sticks" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Floral / Herbal Dhoop Sticks</div>
+                            <div class="slide-title">Floral & Herbal Dhoop Sticks</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-flower"></i><div><div class="feature-label">Fragrance</div><div class="feature-value">Rose, Jasmine, Lavender, Mogra, Marigold & more</div></div></div>
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">8 Inches</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">40�50 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-tree"></i><div><div class="feature-label">Stick Base</div><div class="feature-value">Natural bamboo</div></div></div>
+                                <div class="feature-item"><i class="fas fa-hand-holding-water"></i><div><div class="feature-label">Coating</div><div class="feature-value">Thick herbal masala paste with flower oils</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fill-drip"></i><div><div class="feature-label">Color</div><div class="feature-value">Natural brown or fragrance-based shades</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Aromatic dhoop designed for soothing herbal and floral spirituality, with deep texture and fragrance hold.</div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Herbal and floral dhoop for calm and purity</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner">
+                    <div class="card-image">
+                        <img src="https://page.gensparksite.com/slides_images/910d428d2ff125ebbf73922d103e2022.webp" alt="Cow Dung Herbal Dhoop Sticks" />
+                    </div>
+                    <div class="card-copy">
+                        <div>
+                            <div class="slide-subtitle">Cow Dung Herbal Dhoop Sticks</div>
+                            <div class="slide-title">Cow Dung Herbal Dhoop Sticks</div>
+                            <div class="feature-list">
+                                <div class="feature-item"><i class="fas fa-vihara"></i><div><div class="feature-label">Type</div><div class="feature-value">Solid dhoop stick without bamboo</div></div></div>
+                                <div class="feature-item"><i class="fas fa-ruler"></i><div><div class="feature-label">Length</div><div class="feature-value">3", 4", 6", 8" (custom sizes available)</div></div></div>
+                                <div class="feature-item"><i class="fas fa-seedling"></i><div><div class="feature-label">Ingredient</div><div class="feature-value">Cow dung, herbs, resins, wood powders, essential oils</div></div></div>
+                                <div class="feature-item"><i class="fas fa-fire"></i><div><div class="feature-label">Burn Time</div><div class="feature-value">45�60 minutes approx.</div></div></div>
+                                <div class="feature-item"><i class="fas fa-smell"></i><div><div class="feature-label">Fragrance</div><div class="feature-value">Herbal, Guggal, Loban, Sandalwood, customized blends</div></div></div>
+                                <div class="feature-item"><i class="fas fa-handshake"></i><div><div class="feature-label">Finish</div><div class="feature-value">Handmade smooth finish with strong aroma hold</div></div></div>
+                            </div>
+                        </div>
+                        <div class="card-note">Sacred cow dung formula with herbal and natural ingredients, created for pure traditional fragrance and energy.
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>Traditional cow dung dhoop for puja and rituals</span>
+                    <a href="mailto:blsglobal2017@gmail.com">blsglobal2017@gmail.com</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="card">
+                <div class="card-inner" style="flex-direction:column; align-items:center; text-align:center;">
+                    <div>
+                        <div class="slide-subtitle">Our Promise</div>
+                        <div class="slide-title">Pure � Natural � Traditional</div>
+                        <p style="margin-top:22px; color: rgba(255,255,255,0.8); font-size:16px; line-height:1.8; max-width:760px; margin-left:auto; margin-right:auto;">
+                            Our incense products are crafted from authentic natural ingredients using traditional Indian methods. Each stick and cone is designed to create a calm, sacred, and spiritually uplifting atmosphere for puja, meditation, or everyday fragrance in the home.
+                        </p>
+                        <p style="margin-top:20px; color: rgba(212,175,55,0.9); font-size:15px; line-height:1.7;">
+                            Contact us for bulk orders, custom sizes and fragrance blends.
+                        </p>
+                    </div>
+                </div>
+                <div class="contact-bar">
+                    <span>www.blsglobalenterprise.com | +91 9413647695 | +91 9549999779 | +91 9983574341</span>
+                </div>
+            </div>
+        </div>
+        <div class="slide-indicator" id="slideIndicator">Slide 1 / 13</div>
         <div class="nav-buttons">
-            <button class="nav-btn" id="prevBtn" disabled>Previous</button>
+            <button class="nav-btn" id="prevBtn">Previous</button>
             <button class="nav-btn" id="nextBtn">Next</button>
         </div>
     </div>
-
     <script>
-        let currentSlide = 1;
-        const totalSlides = 3;
         const slides = document.querySelectorAll('.slide');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
+        const indicator = document.getElementById('slideIndicator');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
 
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[n - 1].classList.add('active');
-            prevBtn.disabled = n === 1;
-            nextBtn.disabled = n === totalSlides;
-            nextBtn.textContent = n === totalSlides ? 'Finish' : 'Next';
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            indicator.textContent = `Slide ${index + 1} / ${totalSlides}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.textContent = index === totalSlides - 1 ? 'Restart' : 'Next';
         }
 
-        function nextSlide() {
-            currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+        function goNext() {
+            currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0;
             showSlide(currentSlide);
         }
 
-        // Auto-play slides every 5 seconds
-        let autoPlayInterval = setInterval(nextSlide, 5000);
-
-        function resetAutoPlay() {
-            clearInterval(autoPlayInterval);
-            autoPlayInterval = setInterval(nextSlide, 5000);
+        function goPrev() {
+            currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+            showSlide(currentSlide);
         }
 
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 1) {
-                currentSlide--;
-                showSlide(currentSlide);
-                resetAutoPlay();
-            }
-        });
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
 
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-                resetAutoPlay();
-            } else {
-                currentSlide = 1;
-                showSlide(currentSlide);
-                resetAutoPlay();
-            }
-        });
+        let autoPlay = setInterval(goNext, 9000);
+        document.querySelector('.slideshow-container').addEventListener('mouseenter', () => clearInterval(autoPlay));
+        document.querySelector('.slideshow-container').addEventListener('mouseleave', () => autoPlay = setInterval(goNext, 9000));
 
-        // Pause auto-play on hover
-        const slideshowContainer = document.querySelector('.slideshow-container');
-        slideshowContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoPlayInterval);
-        });
-        slideshowContainer.addEventListener('mouseleave', () => {
-            autoPlayInterval = setInterval(nextSlide, 5000);
-        });
-
-        // Initialize
         showSlide(currentSlide);
     </script>
 </body>
