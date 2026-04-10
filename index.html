@@ -408,18 +408,130 @@
             .card { min-height: auto; }
             .feature-list { grid-template-columns: 1fr; }
         }
+        @media (max-width: 768px) {
+            .card { min-height: auto; padding-bottom: 20px; }
+            .card-inner { padding: 20px; gap: 20px; }
+            .slide-title { font-size: 36px; }
+            .feature-list { gap: 12px; }
+            .feature-item { padding: 12px 14px; font-size: 13px; }
+            .contact-bar { padding: 16px 20px; }
+        }
         @media (max-width: 680px) {
-            .slideshow-container { padding: 10px; }
-            .slide { top: 10px; left: 10px; right: 10px; bottom: 10px; }
-            .slide-title { font-size: 32px; }
-            .intro-main-title { font-size: 40px; letter-spacing: 1px; }
-            .intro-tagline { font-size: 16px; }
-            .intro-logo { width: 100px; font-size: 48px; }
-            .intro-values { grid-template-columns: 1fr; gap: 12px; }
-            .intro-content { padding: 40px 20px; gap: 20px; }
-            .slide-subtitle { font-size: 13px; letter-spacing: 0.25em; }
-            .nav-btn { padding: 10px 14px; font-size: 12px; }
-            .contact-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .slideshow-container { padding: 8px; min-height: 100vh; }
+            .slide { top: 8px; left: 8px; right: 8px; bottom: 8px; }
+            .card {
+                min-height: 0;
+                max-width: 100%;
+                border-radius: 16px;
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            }
+            .card-inner { padding: 16px; gap: 16px; flex-direction: column; }
+            .card-image { flex: 0 0 100%; width: 100%; max-width: 100%; }
+            .card-image img { max-width: 100%; max-height: 280px; }
+            .card-copy { width: 100%; gap: 12px; }
+            .slide-title { font-size: 28px; letter-spacing: 0.5px; }
+            .slide-subtitle { font-size: 12px; margin-bottom: 8px; }
+            .feature-list { grid-template-columns: 1fr; gap: 10px; }
+            .feature-item {
+                padding: 10px 12px;
+                border-radius: 10px;
+                font-size: 12px;
+                gap: 8px;
+            }
+            .feature-item i { font-size: 14px; min-width: 20px; }
+            .feature-label { font-size: 11px; }
+            .feature-value { font-size: 12px; }
+            .card-note {
+                padding: 12px 16px;
+                font-size: 12px;
+                border-left-width: 3px;
+            }
+            .contact-bar {
+                padding: 12px 16px;
+                gap: 8px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .contact-bar span {
+                font-size: 11px;
+                word-break: break-word;
+            }
+            .nav-buttons {
+                bottom: 16px;
+                right: 16px;
+                gap: 8px;
+            }
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 11px;
+                border-radius: 8px;
+            }
+            .slide-indicator {
+                top: 16px;
+                right: 16px;
+                font-size: 11px;
+            }
+            .intro-content {
+                padding: 40px 16px;
+                gap: 24px;
+                min-height: auto;
+            }
+            .intro-logo {
+                width: 100px;
+                height: 100px;
+                font-size: 48px;
+                box-shadow: 0 20px 50px rgba(212,175,55,0.3), inset 0 -3px 8px rgba(0,0,0,0.2);
+            }
+            .intro-brand-name {
+                font-size: 48px;
+                letter-spacing: 2px;
+            }
+            .contact-phones {
+                font-size: 13px;
+            }
+            .contact-phones a {
+                display: block;
+                margin: 3px 0;
+            }
+            .contact-divider {
+                width: 40px;
+                height: 1px;
+            }
+            .contact-email {
+                font-size: 13px;
+            }
+            .contact-email a {
+                display: block;
+                word-break: break-all;
+            }
+            .contact-bar.hero-contact {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 6px;
+            }
+            .contact-bar.hero-contact span {
+                font-size: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .slideshow-container { padding: 6px; }
+            .slide { top: 6px; left: 6px; right: 6px; bottom: 6px; }
+            .card { border-radius: 12px; }
+            .card-inner { padding: 12px; gap: 12px; }
+            .slide-title { font-size: 24px; }
+            .slide-subtitle { font-size: 11px; }
+            .feature-list { gap: 8px; }
+            .feature-item { padding: 8px 10px; font-size: 11px; }
+            .feature-value { font-size: 11px; }
+            .contact-bar { padding: 10px 12px; }
+            .contact-bar span { font-size: 10px; }
+            .nav-btn { padding: 6px 10px; font-size: 10px; }
+            .slide-indicator { font-size: 10px; }
+            .intro-logo { width: 80px; height: 80px; font-size: 40px; }
+            .intro-brand-name { font-size: 36px; letter-spacing: 1px; }
+            .contact-phones { font-size: 12px; }
+            .contact-email { font-size: 12px; }
         }
     </style>
 </head>
